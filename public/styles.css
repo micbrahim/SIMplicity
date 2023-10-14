@@ -10,3 +10,11 @@ body {
 button {
     margin-bottom: 10px;
 }
+
+.hidden {
+    display: none;
+}
+
+nav {
+    margin-bottom: 20px;
+}

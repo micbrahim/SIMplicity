@@ -8,9 +8,13 @@
 </head>
 <body>
     <div id="app">
-        <button id="startCall">Start Call</button>
-        <audio id="localAudio" controls muted autoplay></audio>
-        <audio id="remoteAudio" controls autoplay></audio>
+        <nav>
+            <button id="startCallBtn">Start Call</button>
+        </nav>
+        <section id="callSection" class="hidden">
+            <audio id="localAudio" controls muted autoplay></audio>
+            <audio id="remoteAudio" controls autoplay></audio>
+        </section>
     </div>
     <script src="../src/main.js"></script>
 </body>
