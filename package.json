@@ -1,0 +1,13 @@
+{
+    "name": "SIMplicity",
+    "version": "1.0.0",
+    "description": "International compatability phone calling and messaging app",
+    "main": "src/main.js",
+    "scripts": {
+      "start": "live-server public"
+    },
+    "devDependencies": {
+      "live-server": "^1.2.1"
+    }
+  }
+  

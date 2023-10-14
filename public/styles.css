@@ -1,14 +1,45 @@
 body {
     font-family: Arial, sans-serif;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #f2f2f2;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+h1 {
+    color: #E20074;  /* T-Mobile's Magenta */
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+ol {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 button {
-    margin-bottom: 10px;
+    background-color: #E20074;  /* T-Mobile's Magenta */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #C00062;  /* A slightly darker shade of the T-Mobile magenta for hover effect */
 }
 
 .hidden {
