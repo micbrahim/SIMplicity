@@ -1,12 +1,11 @@
 # SIMplicity
 -[USER-SIDE PROTOTYPE](https://www.figma.com/proto/cVcR6wBthTQO3cnI5ZLme9/Untitled?page-id=0%3A1&type=design&node-id=1-2&viewport=160%2C529%2C0.29&t=QlbCbNUPNDBPxhWB-1&scaling=scale-down&starting-point-node-id=1%3A2&mode=design)
+
 -[RECIEVING END PROTOTYPE](https://www.figma.com/proto/cVcR6wBthTQO3cnI5ZLme9/Untitled?page-id=0%3A1&type=design&node-id=11-9911&viewport=160%2C529%2C0.29&t=QlbCbNUPNDBPxhWB-1&scaling=scale-down&starting-point-node-id=11%3A9911&show-proto-sidebar=1&mode=design)
 
 *An intuitive and easy-to-use web application that offers peer-to-peer voice calling functionality, built for Dubhacks 2023.*
 
-![image](https://github.com/micbrahim/SIMplicity/assets/82174933/93438e34-69d2-4dc2-a1a7-afcb650250c1)
-![image](https://github.com/micbrahim/SIMplicity/assets/82174933/247a6038-64b8-47d2-b2c2-e40f3400f953)
-![image](https://github.com/micbrahim/SIMplicity/assets/82174933/d6d218a2-e793-4056-ba00-f8a0e8336eb5)
+![image](https://github.com/micbrahim/SIMplicity/assets/82174933/80a5e93c-b3d4-46b8-9bcd-0f3e0fee8121)
 
 
 
