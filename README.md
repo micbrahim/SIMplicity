@@ -5,7 +5,7 @@
 
 **An intuitive and easy-to-use web application that offers peer-to-peer voice calling functionality, built for Dubhacks 2023.**
 
-Code details found: DEMO/Sample Apps/ JavaScript_DemoApp/publicDEMO
+Code details [found here:](DEMO/Sample%20Apps/JavaScript_DemoApp/publicDEMO)
 
 ![image](https://github.com/micbrahim/SIMplicity/assets/82174933/0b889e04-8e14-4aeb-8850-3f4e09e5240a)
 
