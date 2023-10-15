@@ -1,4 +1,5 @@
-# SIMplicity
+### SIMplicity
+-[Prototype](https://www.figma.com/proto/cVcR6wBthTQO3cnI5ZLme9/Untitled?page-id=0%3A1&type=design&node-id=1-2&viewport=160%2C529%2C0.29&t=QlbCbNUPNDBPxhWB-1&scaling=scale-down&starting-point-node-id=1%3A2&mode=design)
 An intuitive and easy-to-use web application that offers peer-to-peer voice calling functionality, built for Dubhacks 2023.
 
 ## Table of Contents
