@@ -7,7 +7,7 @@
 
 Code details found: DEMO/Sample Apps/ JavaScript_DemoApp/publicDEMO
 
-![image](https://github.com/micbrahim/SIMplicity/assets/82174933/80a5e93c-b3d4-46b8-9bcd-0f3e0fee8121)
+![image](https://github.com/micbrahim/SIMplicity/assets/82174933/0b889e04-8e14-4aeb-8850-3f4e09e5240a)
 
 
 
