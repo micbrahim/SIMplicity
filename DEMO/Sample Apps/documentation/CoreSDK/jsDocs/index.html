@@ -1,0 +1,94 @@
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>cpaasCoreSDK</title><meta name="description" content="Documentation for cpaasCoreSDK"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container">
+<div class="table-cell" id="tsd-search" data-base=".">
+<div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z" fill="var(--color-text)"></path></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
+<div class="field">
+<div id="tsd-toolbar-links"></div></div>
+<ul class="results">
+<li class="state loading">Preparing search index...</li>
+<li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">cpaasCoreSDK</a></div>
+<div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
+<div class="container container-main">
+<div class="col-8 col-content">
+<div class="tsd-page-title">
+<h2>cpaasCoreSDK</h2></div>
+<div class="tsd-panel tsd-typography">
+<a href="#cpaas-coresdk" id="cpaas-coresdk" style="color: inherit; text-decoration: none;">
+  <h1>CPaaS CoreSDK</h1>
+</a>
+
+<a href="#purpose" id="purpose" style="color: inherit; text-decoration: none;">
+  <h2>Purpose</h2>
+</a>
+<p> This is a JavaScript SDK library for accessing the T-Mobile Communications Platform as a Service (CPaaS) network.
+ This library abstracts the intricate Client registration processes into high-level functions.
+ The CpaasCoreSDK module provides APIs for client registration onto the CPaaS network.  It also provides internal APIs required by other CPaaS SDKs.
+ The CpaasCoreSDK module must be included in any project along with Calling, Messaging, or other SDKs.</p>
+
+<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+  <h2>Features</h2>
+</a>
+<p> The CpaasCoreSDK root interface provides access to the Registration Manager interface along with several other internal interfaces.</p>
+<p> The Registration Manager provides essential APIs and Call-back event notifiers needed for a client application to access account and line information from the CPaaS network.</p>
+<p> The CpaasCoreSDK library will work with both JavaScript and TypeScript projects, but is only designed for a web application running inside a web browser.</p>
+
+<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+  <h2>Documentation</h2>
+</a>
+<p>  All public API methods, common types and interfaces have been documented with JsDocs.  Use a web browser to open the &#39;index.html&#39; file under &#39;built/jsDocs&#39; directory.</p>
+
+<a href="#how-to-use" id="how-to-use" style="color: inherit; text-decoration: none;">
+  <h2>How to use</h2>
+</a>
+<p> Copy the cpaasCoreSDK.js and optional cpaasCoreSDK.d.ts files into a local directory within your application project.</p>
+<p> Include the cpaasCoreSDK library into your application code, then later instantiate and initialize.</p>
+<pre><code><span class="hl-0">import</span><span class="hl-1"> </span><span class="hl-2">*</span><span class="hl-1"> </span><span class="hl-0">as</span><span class="hl-1"> </span><span class="hl-3">cpaasCoreSdkLib</span><span class="hl-1"> </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-4">&#39;../extLibs/cpaasCoreSDK&#39;</span><br/><span class="hl-1">...</span><br/><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-5">cpaasCoreSDK</span><span class="hl-1"> = </span><span class="hl-3">cpaasCoreSdkLib</span><span class="hl-1">.</span><span class="hl-3">CpaasCoreSDK</span><span class="hl-1">.</span><span class="hl-6">getInstance</span><span class="hl-1">()</span><br/><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-5">regMgr</span><span class="hl-1"> = </span><span class="hl-3">cpaasCoreSdkLib</span><span class="hl-1">.</span><span class="hl-6">getRegistrationManager</span><span class="hl-1">()</span><br/><span class="hl-3">regMgr</span><span class="hl-1">.</span><span class="hl-6">initialize</span><span class="hl-1">(</span><span class="hl-3">ClientConfig</span><span class="hl-1">)</span><br/><span class="hl-3">regMgr</span><span class="hl-1">.</span><span class="hl-6">addConnectionEventListener</span><span class="hl-1">(</span><span class="hl-3">ourEventListener_callBack</span><span class="hl-1">)</span><br/><span class="hl-3">regMgr</span><span class="hl-1">.</span><span class="hl-6">appStart</span><span class="hl-1">()</span>
+</code></pre>
+
+<a href="#coresdk-general-theory-of-operation" id="coresdk-general-theory-of-operation" style="color: inherit; text-decoration: none;">
+  <h2>CoreSDK General Theory of Operation</h2>
+</a>
+<p>The application code needs to instantiate CoreSDK library prior to instantiating any of the other CPaaS JavaScript SDKs.<br>
+A reference to the CoreSDK will be needed to instantiate the other SDKs, which need the CoreSDK for registration, configuration, and CPaaS network API access. <br>
+The application code gets the Registration Manager interface from the CoreSDK.<br>
+The Registration Manager singleton object provides access to methods and event call-backs which allow the application code to determine the account lines are available, select lines for registration, monitor connection state, and finally to fully deregister and disconnect from CPaaS on application closing. <br>
+Once the application code has the Registration Manager, it needs to perform the following tasks:<br></p>
+<ol>
+<li>Call the &#39;initialize&#39; method to pass in network environment configuration and other options.</li>
+<li>Set up an event callback listener by calling &#39;addConnectionEventListener&#39; and pass in an object containing callbacks to your application code.</li>
+<li>Call the &#39;appStart&#39; method.</li>
+<li>If the results of the previous step indicate the system was not previously &#39;signed-in&#39;, the application must call the &#39;cpaasSignIn&#39; method.  This will navigate the browser to the CPaaS service login pages, authenticate the user, allow account line selection, then finally reload the user client.</li>
+</ol>
+<ul>
+<li>Note: there are three possible states in which a web browser application might start or restart: 1) Fresh clean start with no prior registration or authorization credentials. 2) A restart resulting in the application redirecting away from the application page to the CPaaS Service, which then redirects back to the user application with AuthCode information in the query string parameters. 3) A Browser refresh or restart after the application has signed-in and registered, and still has viable credentials stored in non-volatile memory.  In this case, the application does not require the user to sign-in again, and instead can immediately proceed to the operational state.<br></li>
+</ul>
+<ol start="5">
+<li>When the user wants to close the application and clear existing registration credentials, or if they want to login to a different account, they first need to call the &#39;disconnect&#39; method which will unregister the client from CPaaS. <br>If the user just wants to quit the app without signing-out, do not call &#39;disconnect&#39;.  That way when the app starts-up again, it can automatically resume operational status by using cached credentials&#39;.</li>
+<li>The Registration Manager has a number of additional methods for querying information associated with registration state.  These, and the other methods already mentioned, have JsDocs information.</li>
+<li>The CoreSDK may be extended to include accessors to addition common resource interfaces such as event logging.</li>
+</ol>
+</div></div>
+<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+<div class="tsd-navigation settings">
+<details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Settings</h3></summary>
+<div class="tsd-accordion-details">
+<div class="tsd-filter-visibility">
+<h4 class="uppercase">Member Visibility</h4><form>
+<ul id="tsd-filter-options">
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li></ul></form></div>
+<div class="tsd-theme-toggle">
+<h4 class="uppercase">Theme</h4><select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
+<nav class="tsd-navigation primary">
+<details class="tsd-index-accordion" open><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Modules</h3></summary>
+<div class="tsd-accordion-details">
+<ul>
+<li class="current selected"><a href="modules.html">cpaas<wbr/>CoreSDK</a>
+<ul>
+<li class="tsd-kind-module"><a href="modules/index.html">index</a></li>
+<li class="tsd-kind-module"><a href="modules/registration_RegistrationMgr.html">registration/<wbr/>Registration<wbr/>Mgr</a></li></ul></li></ul></div></details></nav></div></div>
+<div class="container tsd-generator">
+<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
+<div class="overlay"></div><script src="assets/main.js"></script></body></html>

@@ -1,0 +1,1008 @@
+openapi: 3.0.1
+info:
+  title: NaaS-CPaaS Calling Service OpenAPI
+  description: NaaS CPaaS Calling APIs
+  version: 1.0.1
+servers:
+  - url: https://naas.t-mobile.com/cpaas/v1/call
+    description: Production
+paths:
+  /start:
+    post:
+      tags:
+        - calling-controller
+      description: start call using from/to number
+      operationId: Start Call
+      parameters:
+        - name: Authorization
+          in: header
+          description: Your access token as Bearer Token
+          example: Bearer <access_token>
+          required: true
+          schema:
+            type: string
+        - name: X-Authorization
+          in: header
+          description: PoP token generated for every request
+          required: false
+          schema:
+            type: string
+        - name: x-transaction-id
+          in: header
+          description: The transaction ID is GUID. Represents the API transaction, for use in debugging.
+          example: 233b55ed-4a48-4f33-9efe-6fc277f66e8d
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CallStartRequest'
+        required: true
+      responses:
+        '201':
+          description: Created VOIP Session
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallStartResponse'
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '408':
+          $ref: '#/components/responses/Generic408'
+        '500':
+          $ref: '#/components/responses/Generic500'
+  /ringing/{callId}:
+    post:
+      tags:
+        - calling-controller
+      description: update call status to ringing
+      operationId: statusRinging
+      parameters:
+        - name: Authorization
+          in: header
+          description: Your access token as Bearer Token
+          example: Bearer <access_token>
+          required: true
+          schema:
+            type: string
+        - name: X-Authorization
+          in: header
+          description: PoP token generated for every request
+          required: true
+          schema:
+            type: string
+        - name: x-transaction-id
+          in: header
+          description: The transaction ID is GUID. Represents the API transaction, for use in debugging.
+          example: 233b55ed-4a48-4f33-9efe-6fc277f66e8d
+          required: false
+          schema:
+            type: string
+        - name: callId
+          in: path
+          description: callId
+          required: true
+          schema:
+            type: string
+            description: callId
+            example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE00B587F000E6F9E2D8E3AAF60EE7A6FA0FEDCAE9F1EAEFF904E3D
+          example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE00B587F000E6F9E2D8E3AAF60EE7A6FA0FEDCAE9F1EAEFF904E3D
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '408':
+          $ref: '#/components/responses/Generic408'
+        '500':
+          $ref: '#/components/responses/Generic500'
+  /resume/{callId}:
+    post:
+      tags:
+        - calling-controller
+      description: update call status to Resume
+      operationId: statusResume
+      parameters:
+        - name: Authorization
+          in: header
+          description: Your access token as Bearer Token
+          example: Bearer <access_token>
+          required: true
+          schema:
+            type: string
+        - name: X-Authorization
+          in: header
+          description: PoP token generated for every request
+          required: true
+          schema:
+            type: string
+        - name: x-transaction-id
+          in: header
+          description: The transaction ID is GUID. Represents the API transaction, for use in debugging.
+          example: 233b55ed-4a48-4f33-9efe-6fc277f66e8d
+          required: false
+          schema:
+            type: string
+        - name: callId
+          in: path
+          description: callId
+          required: true
+          schema:
+            type: string
+            description: callId
+            example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE00E148FC05E2F5E6D7E7A5FA0BE653F508B1FCE9B6F405ECD
+          example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE00E148FC05E2F5E6D7E7A5FA0BE653F508B1FCE9B6F405ECD
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CallStatusRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '408':
+          $ref: '#/components/responses/Generic408'
+        '500':
+          $ref: '#/components/responses/Generic500'
+  /acceptResume/{callId}:
+    post:
+      tags:
+        - calling-controller
+      description: Accept Resume request
+      operationId: acceptResume
+      parameters:
+        - name: Authorization
+          in: header
+          description: Your access token as Bearer Token
+          example: Bearer <access_token>
+          required: true
+          schema:
+            type: string
+        - name: X-Authorization
+          in: header
+          description: PoP token generated for every request
+          required: true
+          schema:
+            type: string
+        - name: x-transaction-id
+          in: header
+          description: The transaction ID is GUID. Represents the API transaction, for use in debugging.
+          example: 233b55ed-4a48-4f33-9efe-6fc277f66e8d
+          required: false
+          schema:
+            type: string
+        - name: callId
+          in: path
+          description: callId
+          required: true
+          schema:
+            type: string
+            description: callId
+            example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE00E148FC05E2F5E6D7E7A5FA0BE653F508B1FCE9B6F405ECD
+          example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE00E148FC05E2F5E6D7E7A5FA0BE653F508B1FCE9B6F405ECD
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CallStatusRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '408':
+          $ref: '#/components/responses/Generic408'
+        '500':
+          $ref: '#/components/responses/Generic500'
+  /proceeding/{callId}:
+    post:
+      tags:
+        - calling-controller
+      description: update call status to Proceeding
+      operationId: updateCallStatusProceeding
+      parameters:
+        - name: Authorization
+          in: header
+          description: Your access token as Bearer Token
+          example: Bearer <access_token>
+          required: true
+          schema:
+            type: string
+        - name: X-Authorization
+          in: header
+          description: PoP token generated for every request
+          required: true
+          schema:
+            type: string
+        - name: x-transaction-id
+          in: header
+          description: The transaction ID is GUID. Represents the API transaction, for use in debugging.
+          example: 233b55ed-4a48-4f33-9efe-6fc277f66e8d
+          required: false
+          schema:
+            type: string
+        - name: callId
+          in: path
+          description: callId
+          required: true
+          schema:
+            type: string
+            description: callId
+            example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE00B587F000E6F9E2D8E3AAF60EE7A6FA0FEDCAE9F1EAEFF904E3D
+          example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE00B587F000E6F9E2D8E3AAF60EE7A6FA0FEDCAE9F1EAEFF904E3D
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CallStatusRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '408':
+          $ref: '#/components/responses/Generic408'
+        '500':
+          $ref: '#/components/responses/Generic500'
+  /inProgress/{callId}:
+    post:
+      tags:
+        - calling-controller
+      description: update call status to InProgress
+      operationId: statusInProgress
+      parameters:
+        - name: Authorization
+          in: header
+          description: Your access token as Bearer Token
+          example: Bearer <access_token>
+          required: true
+          schema:
+            type: string
+        - name: X-Authorization
+          in: header
+          description: PoP token generated for every request
+          required: true
+          schema:
+            type: string
+        - name: x-transaction-id
+          in: header
+          description: The transaction ID is GUID. Represents the API transaction, for use in debugging.
+          example: 233b55ed-4a48-4f33-9efe-6fc277f66e8d
+          required: false
+          schema:
+            type: string
+        - name: callId
+          in: path
+          description: callId
+          required: true
+          schema:
+            type: string
+            description: callId
+            example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE00B587F000E6F9E2D8E3AAF60EE7A6FA0FEDCAE9F1EAEFF904E3D
+          example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE00B587F000E6F9E2D8E3AAF60EE7A6FA0FEDCAE9F1EAEFF904E3D
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CallStatusRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '408':
+          $ref: '#/components/responses/Generic408'
+        '500':
+          $ref: '#/components/responses/Generic500'
+  /hold/{callId}:
+    post:
+      tags:
+        - calling-controller
+      description: update call status to Hold
+      operationId: statusHold
+      parameters:
+        - name: Authorization
+          in: header
+          description: Your access token as Bearer Token
+          example: Bearer <access_token>
+          required: true
+          schema:
+            type: string
+        - name: X-Authorization
+          in: header
+          description: PoP token generated for every request
+          required: true
+          schema:
+            type: string
+        - name: x-transaction-id
+          in: header
+          description: The transaction ID is GUID. Represents the API transaction, for use in debugging.
+          example: 233b55ed-4a48-4f33-9efe-6fc277f66e8d
+          required: false
+          schema:
+            type: string
+        - name: callId
+          in: path
+          description: callId
+          required: true
+          schema:
+            type: string
+            description: callId
+            example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE00B587F000E6F9E2D8E3AAF60EE7A6FA0FEDCAE9F1EAEFF904E3D
+          example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE00B587F000E6F9E2D8E3AAF60EE7A6FA0FEDCAE9F1EAEFF904E3D
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CallStatusRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '408':
+          $ref: '#/components/responses/Generic408'
+        '500':
+          $ref: '#/components/responses/Generic500'
+  /acceptHold/{callId}:
+    post:
+      tags:
+        - calling-controller
+      description: Accept hold request
+      operationId: acceptHold
+      parameters:
+        - name: Authorization
+          in: header
+          description: Your access token as Bearer Token
+          example: Bearer <access_token>
+          required: true
+          schema:
+            type: string
+        - name: X-Authorization
+          in: header
+          description: PoP token generated for every request
+          required: true
+          schema:
+            type: string
+        - name: x-transaction-id
+          in: header
+          description: The transaction ID is GUID. Represents the API transaction, for use in debugging.
+          example: 233b55ed-4a48-4f33-9efe-6fc277f66e8d
+          required: false
+          schema:
+            type: string
+        - name: callId
+          in: path
+          description: callId
+          required: true
+          schema:
+            type: string
+            description: callId
+            example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE00B587F000E6F9E2D8E3AAF60EE7A6FA0FEDCAE9F1EAEFF904E3D
+          example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE00B587F000E6F9E2D8E3AAF60EE7A6FA0FEDCAE9F1EAEFF904E3D
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CallStatusRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '408':
+          $ref: '#/components/responses/Generic408'
+        '500':
+          $ref: '#/components/responses/Generic500'
+  /connected/{callId}:
+    post:
+      tags:
+        - calling-controller
+      description: update call status to Connected
+      operationId: updateCallStatusConnected
+      parameters:
+        - name: Authorization
+          in: header
+          description: Your access token as Bearer Token
+          example: Bearer <access_token>
+          required: true
+          schema:
+            type: string
+        - name: X-Authorization
+          in: header
+          description: PoP token generated for every request
+          required: true
+          schema:
+            type: string
+        - name: x-transaction-id
+          in: header
+          description: The transaction ID is GUID. Represents the API transaction, for use in debugging.
+          example: 233b55ed-4a48-4f33-9efe-6fc277f66e8d
+          required: false
+          schema:
+            type: string
+        - name: callId
+          in: path
+          description: callId
+          required: true
+          schema:
+            type: string
+            description: callId
+            example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE00B587F000E6F9E2D8E3AAF60EE7A6FA0FEDCAE9F1EAEFF904E3D
+          example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE00B587F000E6F9E2D8E3AAF60EE7A6FA0FEDCAE9F1EAEFF904E3D
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CallStatusRequest'
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '408':
+          $ref: '#/components/responses/Generic408'
+        '500':
+          $ref: '#/components/responses/Generic500'
+  /renegotiate/{callId}:
+    post:
+      tags:
+        - calling-controller
+      description: update call status to for sdp renegotiation
+      operationId: updateCallStatus
+      parameters:
+        - name: Authorization
+          in: header
+          description: Your access token as Bearer Token
+          example: Bearer <access_token>
+          required: true
+          schema:
+            type: string
+        - name: X-Authorization
+          in: header
+          description: PoP token generated for every request
+          required: true
+          schema:
+            type: string
+        - name: x-transaction-id
+          in: header
+          description: The transaction ID is GUID. Represents the API transaction, for use in debugging.
+          example: 233b55ed-4a48-4f33-9efe-6fc277f66e8d
+          required: false
+          schema:
+            type: string
+        - name: callId
+          in: path
+          description: callId
+          required: true
+          schema:
+            type: string
+            description: callId
+            example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE00B587F000E6F9E2D8E3AAF60EE7A6FA0FEDCAE9F1EAEFF904E3D
+          example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE00B587F000E6F9E2D8E3AAF60EE7A6FA0FEDCAE9F1EAEFF904E3D
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CallStatusRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '408':
+          $ref: '#/components/responses/Generic408'
+        '500':
+          $ref: '#/components/responses/Generic500'
+  /end/{callId}:
+    delete:
+      tags:
+        - calling-controller
+      description: end call
+      operationId: endCallV2
+      parameters:
+        - name: Authorization
+          in: header
+          description: Your access token as Bearer Token
+          example: Bearer <access_token>
+          required: true
+          schema:
+            type: string
+        - name: X-Authorization
+          in: header
+          description: PoP token generated for every request
+          required: true
+          schema:
+            type: string
+        - name: x-transaction-id
+          in: header
+          description: The transaction ID is GUID. Represents the API transaction, for use in debugging.
+          example: 233b55ed-4a48-4f33-9efe-6fc277f66e8d
+          required: false
+          schema:
+            type: string
+        - name: conference
+          in: header
+          description: conference
+          required: false
+          schema:
+            type: string
+            description: conference
+            example: true
+          example: true
+        - name: reason
+          in: header
+          description: reason for ending call
+          required: false
+          schema:
+            type: string
+            description: reason for ending call
+            example: NORMAL_USER_DISCONNECT
+          example: NORMAL_USER_DISCONNECT
+        - name: callId
+          in: path
+          description: callId
+          required: true
+          schema:
+            type: string
+            description: callId
+            example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE00E148FC05E2F5E6D7E7A5FA0BE653F508B1FCE9B6F405ECD
+          example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE00E148FC05E2F5E6D7E7A5FA0BE653F508B1FCE9B6F405ECD
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '408':
+          $ref: '#/components/responses/Generic408'
+        '500':
+          $ref: '#/components/responses/Generic500'
+components:
+  schemas:
+    CallStartRequest:
+      required:
+        - from
+        - sdp
+        - to
+      type: object
+      properties:
+        to:
+          type: string
+          description: Destination address/msisdn
+          example: '14254369410'
+        from:
+          type: string
+          description: Originator address/msisdn
+          example: '14254369410'
+        sdp:
+          type: string
+          description: SDP (Session Description Protocol) Offer
+          example: |-
+            v=0
+            o=- 3892420380 3892420380 IN IP4 54.203.194.151
+            s=pjmedia
+            b=AS:84
+            t=0 0
+            a=X-nat:8
+            m=audio 56275 UDP/TLS/RTP/SAVP 125 8 9 0 101 102
+            c=IN IP4 54.203.194.151
+            b=TIAS:64000
+            a=rtcp:64248 IN IP4 54.203.194.151
+            a=sendrecv
+            a=rtpmap:125 opus/48000/2
+            a=fmtp:125 maxplaybackrate=16000;sprop-maxcapturerate=16000;maxaveragebitrate=48000;useinbandfec=1
+            a=rtpmap:8 PCMA/8000
+            a=rtpmap:9 G722/8000
+            a=rtpmap:0 PCMU/8000
+            a=rtpmap:101 telephone-event/48000
+            a=fmtp:101 0-16
+            a=rtpmap:102 telephone-event/8000
+            a=fmtp:102 0-16
+            a=ssrc:1190394964 cname:5c4c516375e6839e
+            a=ice-ufrag:16d21a9a
+            a=ice-pwd:69b83e223300e2557368c12d
+            a=candidate:Sc0a801c6 1 UDP 1694498815 99.95.171.205 4040 typ srflx raddr 192.168.1.198 rport 4040
+            a=candidate:Hc0a801c6 1 UDP 2130706431 192.168.1.198 4040 typ host
+            a=candidate:R36cbc297 1 UDP 16777215 54.203.194.151 56275 typ relay raddr 99.95.171.205 rport 4035
+            a=candidate:Sc0a801c6 2 UDP 1694498814 99.95.171.205 4024 typ srflx raddr 192.168.1.198 rport 4024
+            a=candidate:Hc0a801c6 2 UDP 2130706430 192.168.1.198 4024 typ host
+            a=candidate:R36cbc297 2 UDP 16777214 54.203.194.151 64248 typ relay raddr 99.95.171.205 rport 4039
+            a=rtcp-mux
+            a=setup:actpass
+            a=fingerprint:SHA-256 EF:65:DF:8B:25:E5:08:E4:65:E8:52:8B:14:14:F7:A7:6B:38:BC:A2:09:FD:F7:91:D8:F9:1C:AF:98:A1:62:51
+        clientCorrelator:
+          type: string
+          description: Unique identifier used for any service requests for a given call
+          example: a777980f-9e7a-4f4a-ae26-22feb3964399
+    CallProxyError:
+      type: object
+      properties:
+        returnCode:
+          type: integer
+          description: return code , can be different from http response code
+          default: 500
+        status:
+          type: string
+          description: status message
+          default: INTERNAL_SERVER_ERROR
+    CallStartResponse:
+      required:
+        - callId
+        - from
+        - to
+      type: object
+      properties:
+        to:
+          type: string
+          description: msisdn to call
+          example: '14254369410'
+        from:
+          type: string
+          description: msisdn calling from
+          example: '14254369410'
+        callId:
+          type: string
+          description: Unique identifier for created call
+          example: 0AEE1B58BAEEDA3EABA42B32EBB3DFE08B9CAF405EAF8EEDDEFADF20FE987F404EFC3ECE1BDE7F80BE8D
+        clientCorrelator:
+          type: string
+          description: Unique identifier used for any service requests for a given call
+          example: a777980f-9e7a-4f4a-ae26-22feb3964399
+      description: Response for Start Call API
+    CallStatusRequest:
+      type: object
+      properties:
+        sdp:
+          type: string
+    ErrorInfo:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorInfoBody'
+    ErrorInfoBody:
+        type: object
+        properties:
+          reasonCode:
+            type: string
+            description: Error identificartion code
+          systemMessage:
+            type: string
+            description: System message error
+          userMessage:
+            type: string
+            description: Detailed error description
+    SessionInvitationNotification:
+      description: When MO starts the call using '/start' MT receives IncomingCallNotification over WSS. So please make sure to have the WSS open on MT. Use this schema to parse the notification. Do not include offer as part of model data to parse the json, since it has inconsistentcy to represent mediaIndicator items. 
+      required:
+        - originatorAddress
+      type: object
+      properties:
+        originatorAddress:
+          type: string
+          description: Address (e.g. ‘sip’ URI, ‘tel’ URI, ‘acr’ URI) of the originator
+          example: tel:+911234567890
+        originatorName:
+          type: string
+          description: Friendly name of the call originator
+          example: originator
+        receiverAddress:
+          type: string
+          description: Address (e.g. ‘sip’ URI, ‘tel’ URI, ‘acr’ URI) of the originator
+          example: tel:+911234567899
+        receiverName:
+          type: string
+          description: Friendly name of the call receiver
+          example: receive
+        callObjectRef:
+          type: string
+          description: The reference to the call object
+        sdp:
+          type: string
+          description: optional. SDP
+        verificationStatus:
+          $ref: '#/components/schemas/TNVerificationStatus'
+        serverCorrelator:
+          type: string
+          description: >-
+            A correlator that the server instructs the client to use for end to
+            end correlation. The server shall use the end to end correlator
+            generated by the network to signal the client to use it for end to
+            end correlation. This field can be used in the Quality-of-Experience
+            (QoE) reports
+      
+      
+    SessionStatusNotification:
+      description: When MO starts the call using '/start' MT receives IncomingCallNotification over WSS. MO recieves further call status notifications, e.g. Ringing, InProgress, Connected, etc. over WSS. So please make sure to have the WSS open on MO. Use this schema to parse the notification.
+      required:
+        - status
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/SessionStatus'
+        responseCode:
+          type: integer
+          description: >-
+            Indicates corresponding SIP response code, mainly used for
+            provisional responses (status set to InProgress)
+        sdp:
+          type: string
+          description: SDP
+        receiverName:
+          type: string
+          description: Name of the receiver
+        receiverAddress:
+          type: string
+          description: Address (e.g. ‘sip’ URI, ‘tel’ URI, ‘acr’ URI) of the receiver
+        callObjectRef:
+          type: string
+          description: Call object reference
+          format: url
+        transferTargetName:
+          type: string
+          description: Name of the participant to whom the call has been transferred
+        transferTargetAddress:
+          type: string
+          description: Address of the participant to whom the call has been transferred
+          format: url
+        diversionAddress:
+          type: string
+        notificationReference:
+          type: object
+          properties:
+            epochTime:
+              type: integer
+            notificationId:
+              type: integer
+            sequenceNumber:
+              type: integer
+        
+        epochTime:
+          type: integer
+        sdpNegotiationSerializationAckRequired:
+          type: string
+        requestError:
+          type: object
+          properties:
+            serviceException:
+              $ref: '#/components/schemas/NotificationException'
+            policyException:
+              $ref: '#/components/schemas/NotificationException'
+            link:
+              $ref: '#/components/schemas/Link'
+        
+        earlyMediaDirection:
+          type: string
+        reason:
+          type: string
+    
+    NotificationException:
+      type: object
+      properties:
+        text:
+          type: string
+        messageId:
+          type: string
+        variable:
+          type: string
+        suggestedAction:
+          type: string
+    SessionStatus:
+      type: string
+      enum:
+        - Initial
+        - InProgress
+        - Ringing
+        - Proceeding
+        - Connected
+        - Terminated
+        - Hold
+        - Resume
+        - SessionCancelled
+        - Declined
+        - Failed
+        - Waiting
+        - NoAnswer
+        - NotReachable
+        - Busy
+        - Forwarded
+        - UpgradeToMeetingInitiated
+        - UpgradeToMeetingInProgress
+        - UpgradeToMeetingSuccess
+        - UpgradeToMeetingFailed
+    
+    MediaDirection:
+      type: string
+      description: >-
+        The direction of the media. MUST be instantiated if “type” is equal to
+        “audio” or “video”. The default is “SendRecv”.
+      enum:
+        - SendRecv
+        - SendOnly
+        - RecvOnly
+        - Inactive
+    
+    TNVerificationStatus:
+      type: string
+      description: >-
+        This enumeration defines the possible values to indicate originator
+        telephone number verification status.
+      enum:
+        - TN-Validation-Passed
+        - TN-Validation-Failed
+        - No-TN-Validation
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+          description: Describes the relationship between the URI and the resource
+        href:
+          type: string
+          description: URI
+          format: url
+
+  responses:
+      Generic400:
+        description: Invalid input
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorInfo"
+            example:
+              errors:
+                - reasonCode: "ERR-4000"
+                  systemMessage: "INVALID_INPUT"
+                  userMessage: "Schema validation failed at  ..."
+      Generic401:
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorInfo"
+            example:
+              errors:
+                - reasonCode: "ERR-4001"
+                  systemMessage: "UNAUTHORIZED"
+                  userMessage: "Authorization failed: ..."
+      Generic403:
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorInfo"
+            example:
+              errors:
+                - reasonCode: "ERR-4003"
+                  systemMessage: "FORBIDDEN"
+                  userMessage: "Operation not allowed: ..."
+      Generic404:
+        description: Not found
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorInfo"
+            example:
+              errors:
+                - reasonCode: "ERR-4004"
+                  systemMessage: "NOT_FOUND"
+                  userMessage: "Entity does not exist"
+      Generic408:
+        description: Request Timeout
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorInfo"
+            example:
+              errors:
+                - reasonCode: "ERR-4008"
+                  systemMessage: "REQUEST_TIMEOUT"
+                  userMessage: "REQUEST_TIMEOUT"
+      Generic500:
+        description: Service unavailable
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorInfo"
+            example:
+              errors:
+                - reasonCode: "ERR-5000"
+                  systemMessage: "INTERNAL_SERVER_ERROR"
+                  userMessage: "Internal server error"

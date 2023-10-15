@@ -1,0 +1,121 @@
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>cpaasCallingSDK</title><meta name="description" content="Documentation for cpaasCallingSDK"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container">
+<div class="table-cell" id="tsd-search" data-base=".">
+<div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z" fill="var(--color-text)"></path></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
+<div class="field">
+<div id="tsd-toolbar-links"></div></div>
+<ul class="results">
+<li class="state loading">Preparing search index...</li>
+<li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">cpaasCallingSDK</a></div>
+<div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
+<div class="container container-main">
+<div class="col-8 col-content">
+<div class="tsd-page-title">
+<h2>cpaasCallingSDK</h2></div>
+<div class="tsd-panel tsd-typography">
+<a href="#callingsdk" id="callingsdk" style="color: inherit; text-decoration: none;">
+  <h1>CallingSDK</h1>
+</a>
+
+<a href="#purpose" id="purpose" style="color: inherit; text-decoration: none;">
+  <h2>Purpose</h2>
+</a>
+<p> This is a JavaScript SDK library for accessing the T-Mobile Communications Platform as a Service (CPaaS) network voice calling features.
+ This library abstracts the intricate CPaaS Client Calling processes into high-level functions.
+ The callingSDK module provides APIs for the client code to make or receive standard phone calls using the CPaaS network.
+ The callingSDK requires the coreSDK be present to establish the user&#39;s registration on the CPaaS network.</p>
+
+<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+  <h2>Features</h2>
+</a>
+<p>  The callingSDK provides a Call Manager Service and individual Call Classes.  The CallManager manages overall calling features
+such as listening for incoming phone calls and providing the API to make a new out-going phone call.  The Call Class gets created
+for each individual in-coming or out-going call, and provides the API features to manage that specific call.</p>
+
+<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+  <h2>Documentation</h2>
+</a>
+<p>  All public API methods, common types and interfaces have been documented with the JsDocs utility.
+  Use a web browser to open the &#39;index.html&#39; file under &#39;jsDocs&#39; directory.</p>
+
+<a href="#how-to-use" id="how-to-use" style="color: inherit; text-decoration: none;">
+  <h2>How to use</h2>
+</a>
+<p> Copy the cpaasCallingSDK.js and optional cpaasCallingSDK.d.ts files into a local directory within your application project.
+ A likely location would be in the same or nearby directory as the cpaasCoreSDK file(s).
+ NOTE!: The cpaasCallingSDK must always be the same build version as the cpaasCoreSDK.  They must be used as a set from the same build.
+ If they are not the same version, the cpaasCallingSDK will throw an error on initialization.</p>
+<p> Include the cpaasCoreSDK and calling library into your application code, then later instantiate and initialize.</p>
+<pre><code><span class="hl-0">import</span><span class="hl-1"> </span><span class="hl-2">*</span><span class="hl-1"> </span><span class="hl-0">as</span><span class="hl-1"> </span><span class="hl-3">coreSdkLib</span><span class="hl-1"> </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-4">&#39;../extLibs/cpaasCoreSDK&#39;</span><br/><span class="hl-0">import</span><span class="hl-1"> </span><span class="hl-2">*</span><span class="hl-1"> </span><span class="hl-0">as</span><span class="hl-1"> </span><span class="hl-3">callingSdkLib</span><span class="hl-1"> </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-4">&#39;../extLibs/cpaasCallingSD</span><span class="hl-5">K</span><br/><span class="hl-1">...</span><br/><span class="hl-6">// First, instantiate and initialize the coreSDK library</span><br/><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-7">coreSDK</span><span class="hl-1"> = </span><span class="hl-3">coreSdkLib</span><span class="hl-1">.</span><span class="hl-3">CoreSDK</span><span class="hl-1">.</span><span class="hl-8">getInstance</span><span class="hl-1">()</span><br/><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-7">regMgr</span><span class="hl-1"> = </span><span class="hl-3">coreSDK</span><span class="hl-1">.</span><span class="hl-8">getRegistrationManager</span><span class="hl-1">()</span><br/><span class="hl-0">await</span><span class="hl-1"> </span><span class="hl-3">regMgr</span><span class="hl-1">.</span><span class="hl-8">initialize</span><span class="hl-1">(</span><span class="hl-3">ClientConfig</span><span class="hl-1">)</span><br/><span class="hl-3">regMgr</span><span class="hl-1">.</span><span class="hl-8">addConnectionEventListener</span><span class="hl-1">(</span><span class="hl-3">ourEventListener_callBack</span><span class="hl-1">)</span><br/><span class="hl-3">regMgr</span><span class="hl-1">.</span><span class="hl-8">appStart</span><span class="hl-1">()</span><br/><span class="hl-3">regMgr</span><span class="hl-1">.</span><span class="hl-8">cpaasSignIn</span><span class="hl-1">()</span><br/><span class="hl-1">...</span><br/><br/><span class="hl-6">// Now instantiate the callingSDK</span><br/><span class="hl-6">// It is recommended to wait until after the coreSDK registration process has completed</span><br/><span class="hl-6">// before intantiating and initializing the other SDKs.  The &#39;onConnectionState&#39; callback</span><br/><span class="hl-6">// handler in &#39;index.ts&#39; shows an example of how this can be accomplished.</span><br/><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-7">callingSDK</span><span class="hl-1"> = </span><span class="hl-3">callingSdkLib</span><span class="hl-1">.</span><span class="hl-8">getInstance</span><span class="hl-1">()</span><br/><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-7">callMgr</span><span class="hl-1"> = </span><span class="hl-3">callindSDK</span><span class="hl-1">.</span><span class="hl-8">getCallManager</span><span class="hl-1">()</span><br/><span class="hl-0">await</span><span class="hl-1"> </span><span class="hl-3">callMgr</span><span class="hl-1">.</span><span class="hl-8">initialize</span><span class="hl-1">(</span><span class="hl-3">callingCfg</span><span class="hl-1">, </span><span class="hl-3">coreSDK</span><span class="hl-1">)</span><br/><span class="hl-3">callMgr</span><span class="hl-1">.</span><span class="hl-8">addCallManagerListener</span><span class="hl-1">(</span><span class="hl-3">listener</span><span class="hl-1">: </span><span class="hl-3">CallManagerListener</span><span class="hl-1">)</span>
+</code></pre>
+
+<a href="#callingsdk-general-theory-of-operation" id="callingsdk-general-theory-of-operation" style="color: inherit; text-decoration: none;">
+  <h2>CallingSDK General Theory of Operation</h2>
+</a>
+<p>The application code needs to instantiate CoreSDK library prior to instantiating the CallingSDK.<br>
+A reference to the CoreSDK needs to be passed into the CallingSDK &#39;initialize&#39; method, along with the Call Manager configuration. <br>
+Below is a template for the Call Manager configuration file, along with explanation for each field.</p>
+<pre><code><span class="hl-3">CallManagerConfig</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-9">ringbackToneURL</span><span class="hl-1">: </span><span class="hl-3">Url</span><span class="hl-1"> </span><span class="hl-6">// url for the audio file played to the local user when they make a call</span><br/><span class="hl-1">  </span><span class="hl-9">ringToneURL</span><span class="hl-1">: </span><span class="hl-3">Url</span><span class="hl-1"> </span><span class="hl-6">// url for the audio file played when a new call is received</span><br/><span class="hl-1">  </span><span class="hl-9">dtmfFolderURLPrefix</span><span class="hl-1">: </span><span class="hl-3">Url</span><span class="hl-1"> </span><span class="hl-6">// url of the folder holding the DTMF tone files.  Files included in demo app</span><br/><span class="hl-1">  </span><span class="hl-3">turnServerDomain</span><span class="hl-1">?: </span><span class="hl-3">string</span><span class="hl-1"> </span><span class="hl-6">// (optional) url for WebRTC TURN server</span><br/><span class="hl-1">  </span><span class="hl-3">turnServerPort</span><span class="hl-1">?: </span><span class="hl-3">number</span><span class="hl-1"> </span><span class="hl-6">// (optional) port number for WebRTC TURN server</span><br/><span class="hl-1">  </span><span class="hl-3">callLogStorage</span><span class="hl-1">?: </span><span class="hl-4">&#39;in-memory&#39;</span><span class="hl-1"> | </span><span class="hl-4">&#39;indexed-db&#39;</span><span class="hl-1"> </span><span class="hl-6">// How the call log data is to be stored</span><br/><span class="hl-1">  </span><span class="hl-9">autoAcceptVideoUpgrade</span><span class="hl-1">: {</span><br/><span class="hl-1">    </span><span class="hl-9">enabled</span><span class="hl-1">: </span><span class="hl-3">boolean</span><span class="hl-1"> </span><span class="hl-6">// automatically accept remote party&#39;s video (false by default)</span><br/><span class="hl-1">  }</span><br/><span class="hl-1">}</span>
+</code></pre>
+<p>After initializing the CallingSDK, the application code attaches a call-back listener which will provide
+a strongly typed status object when a new call arrives or the status of an existing call changes.  See the JS DOCs
+for documentation on the callback option type.  See CallingDemoApp &#39;callingLib.ts&#39; for a code example.
+The callback listeners provided to the Call Manager are in turn passed to each individual call. An additional set of callback listeners may be applied to each call as well.</p>
+<p>When a new call is made, or an in-coming call is received, the CallManager creates a new instance of the Call object.
+The Call Class provides specific control features for each call, and the APIs are detailed in the JS Docs.</p>
+
+<a href="#creating-a-new-call" id="creating-a-new-call" style="color: inherit; text-decoration: none;">
+  <h3>Creating a new call</h3>
+</a>
+<p>To create an out-going call, Use the CallManager &#39;startNewCall&#39; API method which will return a Call Claas instance.
+See JS Docs information on the &#39;startNewCall&#39; API. <br />
+Optionally, the code may use the CallManager &#39;createOutgoingCall&#39; API method which creates the call but does not start it.
+This allows the code the opportunity to set additional callbacks or set the audio devices before starting the call.
+After configuring the Call, the code calls the &#39;start&#39; method of the actual Call object. See JS Docs for more information on this API.</p>
+
+<a href="#answering-an-in-coming-call" id="answering-an-in-coming-call" style="color: inherit; text-decoration: none;">
+  <h3>Answering an in-coming call</h3>
+</a>
+<p>To answer an in-coming call, The CallManager listener will make a call-back to the &#39;onIncomingCall&#39; event, passing an instance
+of a Call Class object.  Use this Call object&#39;s &#39;answer&#39; API method to answer the call.  Or use the &#39;end&#39; method to decline the call.</p>
+
+<a href="#hold-and-resume" id="hold-and-resume" style="color: inherit; text-decoration: none;">
+  <h3>Hold and Resume</h3>
+</a>
+<p>The Call object provides &#39;hold&#39; and &#39;resume&#39; methods to put the call on hold or resume from hold.  The Call state indicates if the call is on hold by changing to &#39;held_locally&#39;.  If the remote party puts the call on hold, the state will change to &#39;held_remotely&#39;, or &#39;held_both&#39; if the call was also put on hold locally.</p>
+
+<a href="#mute-and-unmute" id="mute-and-unmute" style="color: inherit; text-decoration: none;">
+  <h3>Mute and Unmute</h3>
+</a>
+<p>The Call provides API methods to mute and unmute the local microphone, as well as to query if the call is muted.</p>
+
+<a href="#selecting-speakers-microphone-and-camera" id="selecting-speakers-microphone-and-camera" style="color: inherit; text-decoration: none;">
+  <h3>Selecting speakers, microphone, and camera</h3>
+</a>
+<p>The active Call object provides API methods to Get and Set the speakers, microphone, and camera devices used in the current call.</p>
+</div></div>
+<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+<div class="tsd-navigation settings">
+<details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Settings</h3></summary>
+<div class="tsd-accordion-details">
+<div class="tsd-filter-visibility">
+<h4 class="uppercase">Member Visibility</h4><form>
+<ul id="tsd-filter-options">
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li></ul></form></div>
+<div class="tsd-theme-toggle">
+<h4 class="uppercase">Theme</h4><select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
+<nav class="tsd-navigation primary">
+<details class="tsd-index-accordion" open><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Modules</h3></summary>
+<div class="tsd-accordion-details">
+<ul>
+<li class="current selected"><a href="modules.html">cpaas<wbr/>CallingSDK</a>
+<ul>
+<li class="tsd-kind-module"><a href="modules/calling_Call.html">calling/<wbr/>Call</a></li>
+<li class="tsd-kind-module"><a href="modules/calling_CallManager.html">calling/<wbr/>Call<wbr/>Manager</a></li>
+<li class="tsd-kind-module"><a href="modules/index.html">index</a></li></ul></li></ul></div></details></nav></div></div>
+<div class="container tsd-generator">
+<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
+<div class="overlay"></div><script src="assets/main.js"></script></body></html>

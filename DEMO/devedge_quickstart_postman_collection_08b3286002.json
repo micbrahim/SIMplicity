@@ -1,0 +1,316 @@
+{
+	"info": {
+		"_postman_id": "10e1e56b-a594-4531-a4c6-d29f506239d1",
+		"name": "DevEdge Quickstart",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3800021"
+	},
+	"item": [
+		{
+			"name": "Token Generation",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"if (!pm.globals.get(\"jsrsasing-js\")) {",
+							"    const cryptoReqObject = {",
+							"        url: 'http://kjur.github.io/jsrsasign/jsrsasign-latest-all-min.js',",
+							"        method: 'GET'",
+							"    };",
+							"    console.log(\"Inside cryptoReqObject\");",
+							"    pm.sendRequest(cryptoReqObject, (err, res) => {",
+							"        pm.globals.set(\"jsrsasing-js\", res.text());",
+							"    });",
+							"}",
+							"if (!pm.globals.get(\"t-mobile-popToken-js\")) {",
+							"    const popTokenReqObject = {",
+							"        url: 'https://raw.githubusercontent.com/tmobile/tmobile-api-security-lib/master/poptoken-lib/poptoken-builder/js-lib-tmobile-oss-poptoken-builder/poptoken-builder.js',",
+							"        method: 'GET'",
+							"    };",
+							"    console.log(\"Inside popTokenReqObject\");",
+							"    pm.sendRequest(popTokenReqObject, (err, res) => {",
+							"        pm.globals.set(\"t-mobile-popToken-js\", res.text());",
+							"    });",
+							"}",
+							"",
+							"var navigator = {};",
+							"var window = {};",
+							"setTimeout(function() {",
+							"    eval(pm.globals.get(\"jsrsasing-js\"));",
+							"    eval(pm.globals.get(\"t-mobile-popToken-js\"));",
+							"    var _ = require('lodash');",
+							"    /**",
+							"     * pre-compile pm.environment value with the given matched string",
+							"     *",
+							"     * @param preValue - string value that contained pm.environment values like {{variable}}",
+							"     * @return preValue that replaced the value of {{variable}}",
+							"     *",
+							"     * ex)  if the preValue is {{host}}/v4/token, and pm.environment.get(\"host\") has \"https://base.path\"",
+							"     *      then preValue will be compiled with \"https://base.path/v4/token\"",
+							"     */",
+							"    function populatedPmEnvVar(preValue) {",
+							"        // regular expression to parse {{variable}}",
+							"        var regex = /{{([A-Za-z0-9_-]+)}}/g;",
+							"        var matches, output = [];",
+							"        while (matches = regex.exec(preValue)) {",
+							"            output.push(matches[1]);",
+							"            var enviValue = pm.environment.get(matches[1]);",
+							"            // used with loadash library for replace function by postman sandbox",
+							"            preValue = _.replace(preValue, matches[0], enviValue);",
+							"        }",
+							"        console.log(\"populatedPmEnvVar:\" + preValue);",
+							"        return preValue;",
+							"    }",
+							"    /**",
+							"     * Pop Token claims for signatures by API  ",
+							"     * ",
+							"     */",
+							"    const URI = 'uri';",
+							"    const HTTP_METHOD = 'http-method';",
+							"    const BODY = 'body';",
+							"    //const JWT_POPTOKEN = 'jwt.popToken';",
+							"    var popToken = '';",
+							"    var ehtsKeyValueMap = new Map();",
+							"    // regular expression for uri ",
+							"    var urlPatterns = /(http[s]?:\\/\\/)?([^\\/\\s]+\\/)(.*)/;",
+							"    var uris = urlPatterns.exec(populatedPmEnvVar(pm.request.url));",
+							"    var uri = '/' + uris[3];",
+							"",
+							"    var headers = pm.request.headers;",
+							"    headers.each((header) => {",
+							"        if (header.key !== \"X-Authorization\") {",
+							"            var headerValue = populatedPmEnvVar(pm.request.headers.get(header.key));",
+							"            console.log(\"signature field: \" + header.key + \":\" + headerValue)",
+							"            ehtsKeyValueMap.set(header.key, headerValue);",
+							"        }",
+							"    });",
+							"",
+							"    // uris[3] will return uri ",
+							"    console.log(\"signature field: uri:\" + uri);",
+							"    console.log(\"signature field: http-method:\" + pm.request.method);",
+							"",
+							"    ehtsKeyValueMap.set(URI, uri);",
+							"    ehtsKeyValueMap.set(HTTP_METHOD, pm.request.method);",
+							"    // signature if body is avaialble ",
+							"    if (pm.request.body) {",
+							"        ehtsKeyValueMap.set(BODY, populatedPmEnvVar(pm.request.body));",
+							"    }",
+							"    // The validity of 2 minutes has been defined in the method. It can be changed as required.",
+							"    // PLEASE DO NOT EXPOSE YOUR PRIVAKEY TO OUTSIDE OR THIRD PARTY, ",
+							"    // PLEASE KEEP IT AS SECRET SOURCE ON CLIENT SIDE.",
+							"    var privateKeyPemStr = pm.environment.get('private_key');",
+							"",
+							"    popToken = buildPopToken(ehtsKeyValueMap, privateKeyPemStr);",
+							"    pm.environment.set(\"PoPToken\", popToken);",
+							"    console.log(\"PoP Token:\\n\" + popToken);",
+							"}, 3000);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var res = JSON.parse(responseBody);",
+							"    pm.globals.set(\"id_token\", res.id_token);",
+							"    pm.globals.set(\"access_token\", res.access_token);",
+							"    pm.environment.set(\"id_token\", res.id_token);",
+							"    pm.environment.set(\"access_token\", res.access_token);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{client_secret}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{client_id}}",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Authorization",
+						"value": "{{PoPToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{NaaS_FQDN}}/oauth2/v2/tokens",
+					"host": [
+						"{{NaaS_FQDN}}"
+					],
+					"path": [
+						"oauth2",
+						"v2",
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Connectivity",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"if (!pm.globals.get(\"jsrsasing-js\")) {",
+							"    const cryptoReqObject = {",
+							"        url: 'http://kjur.github.io/jsrsasign/jsrsasign-latest-all-min.js',",
+							"        method: 'GET'",
+							"    };",
+							"    console.log(\"Inside cryptoReqObject\");",
+							"    pm.sendRequest(cryptoReqObject, (err, res) => {",
+							"        pm.globals.set(\"jsrsasing-js\", res.text());",
+							"    });",
+							"}",
+							"if (!pm.globals.get(\"t-mobile-popToken-js\")) {",
+							"    const popTokenReqObject = {",
+							"        url: 'https://raw.githubusercontent.com/tmobile/tmobile-api-security-lib/master/poptoken-lib/poptoken-builder/js-lib-tmobile-oss-poptoken-builder/poptoken-builder.js',",
+							"        method: 'GET'",
+							"    };",
+							"    console.log(\"Inside popTokenReqObject\");",
+							"    pm.sendRequest(popTokenReqObject, (err, res) => {",
+							"        pm.globals.set(\"t-mobile-popToken-js\", res.text());",
+							"    });",
+							"}",
+							"",
+							"var navigator = {};",
+							"var window = {};",
+							"setTimeout(function() {",
+							"    eval(pm.globals.get(\"jsrsasing-js\"));",
+							"    eval(pm.globals.get(\"t-mobile-popToken-js\"));",
+							"    var _ = require('lodash');",
+							"    /**",
+							"     * pre-compile pm.environment value with the given matched string",
+							"     *",
+							"     * @param preValue - string value that contained pm.environment values like {{variable}}",
+							"     * @return preValue that replaced the value of {{variable}}",
+							"     *",
+							"     * ex)  if the preValue is {{host}}/v4/token, and pm.environment.get(\"host\") has \"https://base.path\"",
+							"     *      then preValue will be compiled with \"https://base.path/v4/token\"",
+							"     */",
+							"    function populatedPmEnvVar(preValue) {",
+							"        // regular expression to parse {{variable}}",
+							"        var regex = /{{([A-Za-z0-9_-]+)}}/g;",
+							"        var matches, output = [];",
+							"        while (matches = regex.exec(preValue)) {",
+							"            output.push(matches[1]);",
+							"            var enviValue = pm.environment.get(matches[1]);",
+							"            // used with loadash library for replace function by postman sandbox",
+							"            preValue = _.replace(preValue, matches[0], enviValue);",
+							"        }",
+							"        console.log(\"populatedPmEnvVar:\" + preValue);",
+							"        return preValue;",
+							"    }",
+							"    /**",
+							"     * Pop Token claims for signatures by API  ",
+							"     * ",
+							"     */",
+							"    const URI = 'uri';",
+							"    const HTTP_METHOD = 'http-method';",
+							"    const BODY = 'body';",
+							"    //const JWT_POPTOKEN = 'jwt.popToken';",
+							"    var popToken = '';",
+							"    var ehtsKeyValueMap = new Map();",
+							"    // regular expression for uri ",
+							"    var urlPatterns = /(http[s]?:\\/\\/)?([^\\/\\s]+\\/)(.*)/;",
+							"    var uris = urlPatterns.exec(populatedPmEnvVar(pm.request.url));",
+							"    var uri = '/' + uris[3];",
+							"",
+							"    var headers = pm.request.headers;",
+							"    headers.each((header) => {",
+							"        if (header.key !== \"X-Authorization\") {",
+							"            var headerValue = populatedPmEnvVar(pm.request.headers.get(header.key));",
+							"            console.log(\"signature field: \" + header.key + \":\" + headerValue)",
+							"            ehtsKeyValueMap.set(header.key, headerValue);",
+							"        }",
+							"    });",
+							"",
+							"    // uris[3] will return uri ",
+							"    console.log(\"signature field: uri:\" + uri);",
+							"    console.log(\"signature field: http-method:\" + pm.request.method);",
+							"",
+							"    ehtsKeyValueMap.set(URI, uri);",
+							"    ehtsKeyValueMap.set(HTTP_METHOD, pm.request.method);",
+							"    // signature if body is avaialble ",
+							"    if (pm.request.body) {",
+							"        ehtsKeyValueMap.set(BODY, populatedPmEnvVar(pm.request.body));",
+							"    }",
+							"    // The validity of 2 minutes has been defined in the method. It can be changed as required.",
+							"    // PLEASE DO NOT EXPOSE YOUR PRIVAKEY TO OUTSIDE OR THIRD PARTY, ",
+							"    // PLEASE KEEP IT AS SECRET SOURCE ON CLIENT SIDE.",
+							"    var privateKeyPemStr = pm.environment.get('private_key');",
+							"",
+							"    popToken = buildPopToken(ehtsKeyValueMap, privateKeyPemStr);",
+							"    pm.environment.set(\"PoPToken\", popToken);",
+							"    console.log(\"PoP Token:\\n\" + popToken);",
+							"}, 3000);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "X-Authorization",
+						"value": "{{PoPToken}}",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{NaaS_FQDN}}/iot-connectivity/v1/devices/{your-iccid-here}",
+					"host": [
+						"{{NaaS_FQDN}}"
+					],
+					"path": [
+						"iot-connectivity",
+						"v1",
+						"devices",
+						"{your-iccid-here}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,3 @@
+© 2023 T-Mobile USA, Inc. All rights reserved.   
+
+All information, data, source code, object code, or anything contained herein is, and remains, the property of T-Mobile, USA, Inc., its affiliates, or its subsidiaries, (collectively “T-Mobile”). The intellectual and technical concepts contained herein are proprietary to T-Mobile and are protected by copyright laws and may be protected or represented by patents, patents in process, and the goodwill provided by and through trademarks throughout the world owned or licensed by T-Mobile. Duplicating, reproducing, reverse engineering, disseminating, performing, displaying, or any use is strictly prohibited without written permission by T-Mobile. 

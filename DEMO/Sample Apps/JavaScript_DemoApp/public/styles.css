@@ -1,0 +1,51 @@
+.DemoApp {
+  font-family: sans-serif;
+  text-align: center;
+}
+div {
+  margin: 2px;
+  padding: 2px;
+}
+#appTitle {
+  font-size: xx-large;
+  height: 40px;
+  margin: auto;
+  padding: 2px;
+  width: 100%;
+}
+
+div#core, div#callingArea {
+  border: 1px solid cornflowerblue;
+}
+
+input.ok {
+  background-color: lightgreen;
+}
+
+input.error {
+  background-color: orangered;
+}
+
+div#videoArea {
+  height: 200px;
+  width: 600px;
+}
+
+div#videoArea video {
+  height: 99%;
+  width: 48%;
+  border: 1px dashed blueviolet;
+}
+button {
+  margin: 2px;
+}
+#callControls label {
+  margin: 5px;
+}
+#participantsList {
+  width: 500px;
+}
+
+
+
+

@@ -1,0 +1,384 @@
+openapi: 3.0.1
+info:
+  title: NaaS-CPaaS Essential APIs 
+  description: NaaS CPaaS Essential APIs which are pre-requisites.
+  version: 1.0.0
+servers:
+  - url: https://naas.t-mobile.com/cpaas/v1/
+    description: Production
+paths:
+  /oauth/token:
+    post:
+      tags:
+        - CPaaS Token Services
+      description: CPaaS Oauth token API
+      operationId: token call
+      parameters:   
+        - name: grant_type
+          in: query
+          description: grant type
+          example: authorization_code
+          required: true
+          schema:
+            type: string  
+        - name: redirect_uri
+          in: query
+          description: client registered uri
+          example: https://example.com/
+          required: true
+          schema:
+            type: string
+        - name: code
+          in: query
+          description: authorization code received after user logged in
+          example: b431cf69-c428-4002-8e9c-xx16384
+          required: true
+          schema:
+            type: string 
+        - name: Authorization
+          in: header
+          description: Authorization using client_id and client_secret as Basic Auth
+          example: Basic <Base64Encoded>
+          required: true
+          schema:
+            type: string
+        - name: X-Authorization
+          in: header
+          description: PoP token generated for every request
+          required: true
+          schema:
+            type: string
+        - name: x-transaction-id
+          in: header
+          description: The transaction ID is GUID. Represents the API transaction, for use in debugging. 
+          example: 233b55ed-4a48-4f33-9efe-6fc277f66e8d
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: CPaaS Token Repsonse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CPaaSTokenResponse'
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '408':
+          $ref: '#/components/responses/Generic408'
+        '500':
+          $ref: '#/components/responses/Generic500'
+  /account/status:
+    get:
+      tags:
+        - Account Management services
+      description: Account registration Status
+      operationId: Account registration Status
+      parameters:
+        - name: Authorization
+          in: header
+          description: Your access token as Bearer Token
+          example: Bearer <access_token>
+          required: true
+          schema:
+            type: string
+        - name: X-Authorization
+          in: header
+          description: PoP token generated for every request
+          required: true
+          schema:
+            type: string
+        - name: x-transaction-id
+          in: header
+          description: The transaction ID is GUID. Represents the API transaction, for use in debugging. 
+          example: 233b55ed-4a48-4f33-9efe-6fc277f66e8d
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful client registration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegistrationStatusResponse'
+        '202':
+          description: >-
+            Accepted registration status request and processing, try again in
+            some time
+          content:
+            application/json: {}
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '408':
+          $ref: '#/components/responses/Generic408'
+        '409':
+          $ref: '#/components/responses/Generic409'
+        '500':
+          $ref: '#/components/responses/Generic500' 
+  /account/unlink:
+    delete:
+      tags:
+        - Account Management services
+      description: Unlink a previously linked account
+      operationId: unlinkAccount
+      parameters:
+        - name: Authorization
+          in: header
+          description: Your access token as Bearer Token
+          example: Bearer <access_token>
+          required: true
+          schema:
+            type: string
+        - name: X-Authorization
+          in: header
+          description: PoP token generated for every request
+          required: true
+          schema:
+            type: string
+        - name: x-transaction-id
+          in: header
+          description: The transaction ID is GUID. Represents the API transaction, for use in debugging. 
+          example: 233b55ed-4a48-4f33-9efe-6fc277f66e8d
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful unlink
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '408':
+          $ref: '#/components/responses/Generic408'
+        '500':
+          $ref: '#/components/responses/Generic500' 
+  /account-mgmt/linkAccount:
+    get:
+      tags:
+      - Account Linking services
+      description: "Presents login page to partner to start process of selecting a line and register to use telephony services."
+      operationId: linkAccount
+      parameters:
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        example: tmon-test
+      - name: client_secret
+        in: query
+        required: false
+        schema:
+          type: string
+        example: YGYGJBbybybvy
+      - name: state
+        in: query
+        required: false
+        schema:
+          type: string
+        example: abcd
+      - name: redirect_uri
+        description: partner's redirect uri where authcode will be returned
+        in: query
+        required: true
+        schema:
+          type: string
+        example: http://localhost:8080
+      responses:
+        200:
+          description: success and presents login page
+
+  /account-mgmt/changeEmergencyAddress:
+    post:
+      tags:
+        - Account Linking services
+      description: "Presents current e911 address and allows you to edit. If a failure-redirect-url is not provided all responses will be redirected to success-redirect-url. Authorization MUST be sent via query or header param."
+      operationId: changeEmergencyAddress
+      parameters:
+        - name: success-redirect-url
+          in: query
+          required: true
+          schema:
+            type: string
+          example: http://localhost:8080/success
+        - name: failure-redirect-url
+          in: query
+          required: false
+          schema:
+            type: string
+          example: http://localhost:8080/failure
+        - name: Authorization
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Bearer Access token
+          example: Bearer <JWT token>
+      responses:
+        200:
+          description: success and presents changeEmergencyAddress page
+components:
+  schemas:
+    CPaaSTokenResponse:
+      required:
+        - access_token
+        - refresh_token
+        - token_type
+        - expires_in
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: access token for the resource API calls
+          example: 'eyJraWQiOiI3N2I3NDExZmRhNWM0ZDI1YjA3ZjQ5NGNiY2EyZTQ0NCIsImFsZyI6IlJTMjU2IiwidHlwIjoiSldUIn0.eyJpc3MiOiJodHRwczovL2FwaS1kZXZzdGcudC1tb2JpbGUuY29tIiwiYXVkIjoiREFBU19URVNUIiwic2NvcGUiOiJvcGVuaWQgdnZtIGNoYXQiLCJjbGllbnRfaWQiOiJEQUFTX1RFU1QiLCJ1c24iOiJiNTU0MDZjMWIxOGFmZmE5IiwiaWF0IjoxNjk0NzI5NjE4LCJleHAiOjE2OTQ4MTYwMTgsInN1YiI6IlUtMTQ3NTk3MjctZThkNC00OWNlLTllZTAtZDIyMzhkM2RjYTI1In0.AnavP4NGGoG-ghZLzlwQXK'
+        refresh_token:
+          type: string
+          description: Refresh token
+          example: 'eyJraWQiOiI3N2I3NDExZmRhNWM0ZDI1YjA3ZjQ5NGNiY2EyZTQ0NCIsImFsZyI6IlJTMjU2IiwidHlwIjoiSldUIn0.eyJpc3MiOiJodHRwczovL2FwaS1kZXZzdGcudC1tb2JpbGUuY29tIiwiYXVkIjoiREFBU19URVNUIiwic2NvcGUiOiJvcGVuaWQgdnZtIGNoYXQiLCJjbGllbnRfaWQiOiJEQUFTX1RFU1QiLCJ1c24iOiJiNTU0MDZjMWIxOGFmZmE5IiwiaWF0IjoxNjk0NzI5NjE4LCJleHAiOjE2OTQ4MTYwMTgsInN1YiI6IlUtMTQ3NTk3MjctZThkNC00OWNlLTllZTAtZDIyMzhkM2RjYTI1In0.AnavP4NGGoG-ghZLzlwQXK'
+        token_type:
+          type: string
+          description: type of token
+          example: Bearer
+        expires_in:
+          type: integer
+          description: Expiry time of token
+          example: 86400
+      description: Response for Start Call API
+    RegistrationInfo:
+      type: object
+      properties:
+        msisdn:
+          type: string
+          description: Line msisdn
+          example: "4251234567"
+        regStatus:
+          type: boolean
+          description: Line Registration Status
+          example: true
+      description: Registered lines
+    RegistrationStatusResponse:
+      type: object
+      properties:
+        returnCode:
+          type: integer
+          description: Return code
+          format: int32
+          example: 200
+        channelUrl:
+          type: string
+          description: Channel url
+          example: wss://wrgweb1.ttn.t-mobile.com:3030/wss/channelCreateUrl/notificationchannel/v1/16F015FCC39A2509C07902B8EDC350CD799362ECA6B21B13DB2FB3BAD6E974A4/channels/mavch1/notifications
+        lines:
+          type: array
+          description: Registered lines
+          items:
+            $ref: '#/components/schemas/RegistrationInfo'
+    ErrorInfo:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorInfoBody'
+    ErrorInfoBody:
+      type: object
+      properties:
+        reasonCode:
+          type: string
+          description: Error identificartion code 
+        systemMessage:
+          type: string
+          description: System message error 
+        userMessage:
+          type: string
+          description: Detailed error description
+  responses:
+    Generic400:
+      description: Invalid input
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorInfo"
+          example:
+            errors:
+              - reasonCode: "ERR-4000"
+                systemMessage: "INVALID_INPUT"
+                userMessage: "Schema validation failed at  ..."
+    Generic401:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorInfo"
+          example:
+            errors:
+              - reasonCode: "ERR-4001"
+                systemMessage: "UNAUTHORIZED"
+                userMessage: "Authorization failed: ..."
+    Generic403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorInfo"
+          example:
+            errors:
+              - reasonCode: "ERR-4003"
+                systemMessage: "FORBIDDEN"
+                userMessage: "Operation not allowed: ..."
+    Generic404:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorInfo"
+          example:
+            errors:
+              - reasonCode: "ERR-4004"
+                systemMessage: "NOT_FOUND"
+                userMessage: "Entity does not exist"
+    Generic408:
+      description: Request Timeout
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorInfo"
+          example:
+            errors:
+              - reasonCode: "ERR-4008"
+                systemMessage: "REQUEST_TIMEOUT"
+                userMessage: "REQUEST_TIMEOUT"
+    Generic409:
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorInfo"
+          example:
+            errors:
+              - reasonCode: "ERR-4009"
+                systemMessage: "Conflict"
+                userMessage: "Conflict"
+    Generic500:
+      description: Service unavailable
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorInfo"
+          example:
+            errors: 
+              - reasonCode: "ERR-5000"
+                systemMessage: "INTERNAL_SERVER_ERROR"
+                userMessage: "Internal server error"
