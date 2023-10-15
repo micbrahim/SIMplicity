@@ -33,12 +33,12 @@ git clone https://github.com/micbrahim/SIMplicity/
 
 2. Navigate to the project directory:
 ```
-cd calling-web-app
+cd DEMO/Sample\ Apps/JavaScript_DemoApp/publicDemo
 ```
 
-3. Install dependencies:
+3. Run the application on a local development server (8080):
 ```
-npm install
+python -m http.sever 8080
 ```
 
 4. Run the application on a local development server:
@@ -50,7 +50,6 @@ npm start
 1. Open the app in a web browser.
 2. Grant the necessary permissions to access your microphone.
 3. Click on the "Start Call" button to initiate a voice call.
-4. Share the link with another user to connect and start the voice call.
 
 ## Technology Stack
 - **WebRTC**: For real-time communication.
