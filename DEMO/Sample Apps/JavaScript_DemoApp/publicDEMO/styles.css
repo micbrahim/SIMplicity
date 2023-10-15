@@ -1,29 +1,86 @@
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+}
+
 .DemoApp {
   font-family: sans-serif;
   text-align: center;
 }
+
 div {
-  margin: 2px;
-  padding: 2px;
-}
-#appTitle {
-  font-size: xx-large;
-  height: 40px;
-  margin: auto;
-  padding: 2px;
-  width: 100%;
+  margin: 10px;
+  padding: 10px;
 }
 
+#appTitle {
+  font-size: 60px;
+  padding: 10px;
+  background-color: #E20074;  /* T-Mobile Magenta */
+  color: white;
+  height: 80px;
+  width: fill;
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'Monoton', sans-serif;
+  position: relative;  /* Changed from absolute to relative */
+}
+
+/* Core and Calling Area */
 div#core, div#callingArea {
-  border: 1px solid cornflowerblue;
+  border: 1px solid #E20074;
+  border-radius: 10px;  /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Drop shadow */
+  background-color: white;  
+  padding: 20px;  /* Additional padding to give space inside the box */
+  margin-bottom: 20px;  /* Space between the boxes */
+}
+
+
+/* Input Styles */
+input {
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
 }
 
 input.ok {
-  background-color: lightgreen;
+  background-color: #D3FFD5;
+  border-color: green;
 }
 
 input.error {
-  background-color: orangered;
+  background-color: #FFD6D6;
+  border-color: red;
+}
+
+/* Button Styles */
+button {
+  margin: 5px;
+  padding: 7px 15px;
+  border: none;
+  border-radius: 3px;
+  background-color: #E20074;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #C00062;
+}
+
+/* Other Styles */
+#callControls label {
+  margin: 5px;
+}
+
+#participantsList {
+  width: 500px;
 }
 
 div#videoArea {
@@ -34,18 +91,27 @@ div#videoArea {
 div#videoArea video {
   height: 99%;
   width: 48%;
-  border: 1px dashed blueviolet;
-}
-button {
-  margin: 2px;
-}
-#callControls label {
-  margin: 5px;
-}
-#participantsList {
-  width: 500px;
+  border: 1px dashed #E20074;
 }
 
+.large-call-button {
+  font-size: 20px;
+  padding: 15px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.large-call-button i {
+  margin-right: 10px;
+}
 
+#tmobileLogo {
+  height: 90px; /* Adjust this as per your preference */
+  width: auto;  /* Keeps the aspect ratio of the image */
+  position: absolute; 
+  top: 10px;   /* Position from the top of the #appTitle */
+  right: 10px; /* Position from the right of the #appTitle */
+  margin: 0;   /* No margin needed for an absolutely positioned element */
+}
 
