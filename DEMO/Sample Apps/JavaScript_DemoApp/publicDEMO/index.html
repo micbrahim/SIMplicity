@@ -8,7 +8,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
-    <title>SIMplicity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gabarito" rel="stylesheet">  
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gabarito&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+<title>SIMplicity</title>
   </head>
 
   <body>
@@ -26,11 +32,12 @@
           <label for="toNumberInput">To: </label>
           <input id="toNumberInput" type="text" maxlength="15" pattern="[0-9]" />
           <br>
+          <br>
           <label for="emergencyContacts">Emergency Contacts: </label>
           <select id="emergencyContacts">
               <!-- The options will be populated by JavaScript -->
           </select>
-        <button id="addEmergencyContact">Add Contact</button>
+        <button id="addEmergencyContact"><h4>Add Contact</h4></button>
         </div>
         <div class="centered-btn-container">
           <button id="callButton"></button>
@@ -40,7 +47,9 @@
           <button id="endButton">End</button>
           <button id="muteButton">Mute</button>
           <button id="holdButton">Hold</button>
-          <label for="callStatus">Call Status</label>
+          <br>
+          <br>
+          <label for="callStatus">Call Status:</label>
           <input id="callStatus" type="text" maxlength="25" />
         </div>
       </div>
@@ -91,7 +100,7 @@
 
       // Emergency Contacts
       const emergencyContacts = [
-      { name: "Emergency", number: "911" }
+      { name: "Mom", number: "12345678910" }
       ];
 
       function populateEmergencyContacts() {

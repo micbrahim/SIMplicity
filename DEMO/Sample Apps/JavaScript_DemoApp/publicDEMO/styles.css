@@ -32,12 +32,14 @@ div {
 
 /* Core and Calling Area */
 div#core, div#callingArea {
-  border: 1px solid #E20074;
+  border: 3px solid #E20074;
   border-radius: 10px;  /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Drop shadow */
   background-color: white;  
   padding: 20px;  /* Additional padding to give space inside the box */
   margin-bottom: 20px;  /* Space between the boxes */
+  font-family: 'Gabarito', sans-serif;
+font-family: 'Ubuntu', sans-serif;
 }
 
 
@@ -45,7 +47,18 @@ div#core, div#callingArea {
 input {
   padding: 5px;
   border-radius: 3px;
-  border: 1px solid #ccc;
+  border: 1px solid #E20074;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  font-size: 18px;  /* Increase font-size for better readability and larger appearance */
+  padding: 10px 15px;  /* Increase padding for a more spacious feel */
+  height: 15px;  /* Set a fixed height for uniformity */
+}
+
+input:focus {
+  border-color: #FF4D92;  /* slightly lighter pink for focus effect */
+  box-shadow: 0 0 5px #FF4D92; /* glow effect */
+  outline: none;  /* removing the default focus outline */
+  background-color: #FFF0F4;
 }
 
 input.ok {
@@ -61,7 +74,7 @@ input.error {
 /* Button Styles */
 button {
   margin: 5px;
-  padding: 7px 15px;
+  padding: 2px 15px;
   border: none;
   border-radius: 3px;
   background-color: #E20074;
@@ -75,10 +88,6 @@ button:hover {
   background-color: #af045c;
 }
 
-/* Other Styles */
-#callControls label {
-  margin: 5px;
-}
 
 #participantsList {
   width: 500px;
@@ -178,3 +187,42 @@ h1 {
   padding-bottom: 10px; /* Some space between the text and the underline */
 }
 
+
+
+select {
+  padding: 0px 10px;  /* vertical and horizontal padding */
+  border: 1px solid #E20074;  /* pink border */
+  border-radius: 3px;  /* rounding the corners */
+  background-color: #fff;  /* white background */
+  color: #333;  /* text color */
+  appearance: none;  /* this removes the default OS specific styling */
+  transition: border-color 0.3s, box-shadow 0.3s;  /* for smooth transitions */
+  font-size: 15px;
+  width: 200px;
+  height: 30px;
+}
+
+select:focus {
+  border-color: #FF4D92;  /* slightly lighter pink for focus effect */
+  box-shadow: 0 0 5px #FF4D92; /* glow effect */
+  outline: none;  /* removing the default focus outline */
+  background-color: #FFF0F4;
+}
+
+
+h4{
+  font-size: 15px;
+  padding: 5px;
+  margin: 0;
+}
+
+#muteButton, #endButton, #holdButton{
+  font-size: 15px;
+  padding: 10px, 5px;
+  margin: 0;
+}
+
+#callControls{
+  justify-content: center;
+  text-align: center;
+}
