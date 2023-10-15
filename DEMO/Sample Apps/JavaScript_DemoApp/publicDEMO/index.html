@@ -8,13 +8,41 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
-    <title>CPaaS CallingSDK Demo</title>
+    <title>SIMplicity</title>
   </head>
 
   <body>
     <div id="appTitle">SIMplicity
     <img src="img/T-Mobile_New_Logo_Primary_RGB_W-on-M.jpg" alt="T-Mobile Logo" id="tmobileLogo"> </div>
     <div id="root">
+    <div id="customAlert" style="display:none;">
+      Emergency contact notified, help is on the way!
+    </div>    
+      <div id="callingArea">
+        <div id="primaryNumber">
+          <lable for="fromNumberSelect">From: </lable>
+          <select id="fromNumberSelect"></select>
+          <label for="toNumberInput">To: </label>
+          <input id="toNumberInput" type="text" maxlength="15" pattern="[0-9]" />
+          <br>
+          <label for="emergencyContacts">Emergency Contacts: </label>
+          <select id="emergencyContacts">
+              <!-- The options will be populated by JavaScript -->
+          </select>
+        <button id="addEmergencyContact">Add Contact</button>
+        </div>
+        <div class="centered-btn-container">
+          <button id="callButton"><i class="fas fa-phone-"></i>Call</button>
+          <button id="sosButton"><i class="fas fa-phone-"></i>SOS</button>
+        </div>        
+        <div id="callControls">
+          <button id="endButton">End</button>
+          <button id="muteButton">Mute</button>
+          <button id="holdButton">Hold</button>
+          <label for="callStatus">Call Status</label>
+          <input id="callStatus" type="text" maxlength="25" />
+        </div>
+      </div>
       <div id="core">
         Core SDK
         <div id="statusDiv">
@@ -32,27 +60,6 @@
         <div id="infoOutDiv">
           <div>Account Lines</div>
           <textarea id="infoText" cols="100" rows="2" maxlength="100"></textarea>
-        </div>
-      </div>
-
-      <div id="callingArea">
-        Calling SDK
-        <div id="primaryNumber">
-          <lable for="fromNumberSelect">From: </lable>
-          <select id="fromNumberSelect"></select>
-          <label for="toNumberInput">To: </label>
-          <input id="toNumberInput" type="text" maxlength="15" pattern="[0-9]" />
-        </div>
-        <div class="centered-btn-container">
-          <button id="callButton"><i class="fas fa-phone-"></i>Call</button>
-          <button id="sosButton"><i class="fas fa-phone-"></i>SOS</button>
-        </div>        
-        <div id="callControls">
-          <button id="endButton">End</button>
-          <button id="muteButton">Mute</button>
-          <button id="holdButton">Hold</button>
-          <label for="callStatus">Call Status</label>
-          <input id="callStatus" type="text" maxlength="25" />
         </div>
       </div>
     </div>
@@ -81,6 +88,24 @@
       const RESUME = 'Resume'
       const DISCONNECTED = 'disconnected'
 
+      // Emergency Contacts
+      const emergencyContacts = [
+      { name: "Emergency", number: "911" },
+      { }
+      ];
+
+      function populateEmergencyContacts() {
+      const contactsSelect = document.getElementById('emergencyContacts');
+      contactsSelect.innerHTML = "";  // Clear previous options
+
+      emergencyContacts.forEach(contact => {
+        const option = document.createElement('option');
+        option.value = contact.number;
+        option.innerText = `${contact.name} (${contact.number})`;
+        contactsSelect.appendChild(option);
+        });
+      }
+ 
       // Setup event listeners for the html buttons
       const siButton = document.getElementById('signInButton')
       if (siButton) {
@@ -171,6 +196,73 @@
           }
         })
       }
+      /////////////////////////////////////////
+      /////////////////////////////////////////
+      // const sosButton = document.getElementById('sosButton');
+      // if (sosButton) {
+      //     sosButton.addEventListener('click', () => {
+      //         const selectedContactNumber = document.getElementById('emergencyContacts').value;
+      //         if (selectedContactNumber) {
+      //             makeOutgoingCall(selectedContactNumber, fromNumber, false)
+      //                 .then((ac) => {
+      //                     setActiveCall(ac);
+      //                 })
+      //                 .catch((err) => {
+      //                     console.warn('Error making call', err);
+      //                     resetButtonDefaults();
+      //                 });
+      //         } else {
+      //             console.warn('No emergency contact selected.');
+      //         }
+      //     });
+      // }
+      const sosButton = document.getElementById('sosButton');
+      const customAlert = document.getElementById('customAlert');
+
+      function showAlert() {
+          customAlert.style.display = 'block';
+          setTimeout(() => {
+              customAlert.style.display = 'none';
+          }, 10000);  // Hide the alert after 3 seconds
+      }
+      if (sosButton) {
+          sosButton.addEventListener('click', () => {
+              const fromNumberSelectEle = document.getElementById('fromNumberSelect');
+              const selectedOptions = fromNumberSelectEle.selectedOptions;
+              let fromNumber;
+              if (selectedOptions && selectedOptions[0]) {
+                  fromNumber = selectedOptions[0].innerText;
+              }
+              if (!fromNumber) {
+                  console.warn('Cannot determine fromNumber from selection element');
+                  // Calling code will default to using the first line of available lines
+              }
+
+              // Getting the chosen emergency contact number
+              const toNumberEle = document.getElementById('emergencyContacts');
+              const toNumber = toNumberEle.value;
+              if (!toNumber) {
+                  console.warn('No emergency contact number selected');
+                  return;
+              }
+
+              sosButton.setAttribute('disabled', 'true');
+
+              makeOutgoingCall(toNumber, fromNumber, false)
+                  .then((ac) => {
+                      setActiveCall(ac);
+                      showAlert();
+                  })
+                  .catch((err) => {
+                      console.warn('Error making call', err);
+                      resetButtonDefaults();
+                  });
+          });
+      }
+
+
+
+
 
       const callStatusInput = document.getElementById('callStatus')
       if (callStatusInput) {
@@ -194,6 +286,20 @@
           callButton.removeAttribute('disabled')
         }
       }
+
+      document.getElementById('addEmergencyContact').addEventListener('click', () => {
+          const contactName = prompt("Enter the name of the emergency contact:");
+          const contactNumber = prompt("Enter the number of the emergency contact:");
+          
+          if (contactName && contactNumber) {
+              emergencyContacts.push({ name: contactName, number: contactNumber });
+              populateEmergencyContacts();
+          }
+      });
+
+      populateEmergencyContacts();
+
+
 
       resetButtonDefaults()
 

@@ -147,4 +147,20 @@ div#videoArea video {
   display: flex;
 }
 
+#sosButton:hover{
+  background-color: #3d0101;
+}
+
+#customAlert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 15px;
+  background-color: #681610; /* Red background */
+  color: white;
+  z-index: 1000; /* Ensure it appears above all other elements */
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
 
