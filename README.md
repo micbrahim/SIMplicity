@@ -41,11 +41,6 @@ cd DEMO/Sample\ Apps/JavaScript_DemoApp/publicDemo
 python -m http.sever 8080
 ```
 
-4. Run the application on a local development server:
-```
-npm start
-```
-
 ## Usage
 1. Open the app in a web browser.
 2. Grant the necessary permissions to access your microphone.
