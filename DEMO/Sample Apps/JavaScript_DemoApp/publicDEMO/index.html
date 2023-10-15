@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link href="./styles.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
@@ -43,16 +43,17 @@
           <label for="toNumberInput">To: </label>
           <input id="toNumberInput" type="text" maxlength="15" pattern="[0-9]" />
         </div>
-        <div id="callControls">       
+        <div class="centered-btn-container">
+          <button id="callButton"><i class="fas fa-phone-"></i>Call</button>
+          <button id="sosButton"><i class="fas fa-phone-"></i>SOS</button>
+        </div>        
+        <div id="callControls">
           <button id="endButton">End</button>
           <button id="muteButton">Mute</button>
           <button id="holdButton">Hold</button>
           <label for="callStatus">Call Status</label>
           <input id="callStatus" type="text" maxlength="25" />
         </div>
-        <button id="callButton" class="large-call-button">
-          <i class="fas fa-phone-alt"></i> Call
-        </button>  
       </div>
     </div>
 

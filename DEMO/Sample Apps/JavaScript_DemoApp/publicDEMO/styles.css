@@ -71,7 +71,7 @@ button {
 }
 
 button:hover {
-  background-color: #C00062;
+  background-color: #af045c;
 }
 
 /* Other Styles */
@@ -94,16 +94,24 @@ div#videoArea video {
   border: 1px dashed #E20074;
 }
 
-.large-call-button {
-  font-size: 20px;
-  padding: 15px 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+#callButton{
+    width: 200px;        /* Set width of button */
+    height: 200px;       /* Set height of button */
+    border-radius: 50%;  /* Makes the button round */
+    font-size: 20px;     /* Adjust font size as per your requirement */
+    border: none;        /* Removes default border */
+    background-color: #E20074; /* Background color */
+    color: white;        /* Text color */
+    cursor: pointer;     /* Makes it clear that the button is clickable */
+    outline: none;       /* Removes the default focus outline */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
-.large-call-button i {
-  margin-right: 10px;
+#callButton:hover {
+  background-color: #af045c; /* Darker shade for hover effect */
 }
 
 #tmobileLogo {
@@ -114,4 +122,29 @@ div#videoArea video {
   right: 10px; /* Position from the right of the #appTitle */
   margin: 0;   /* No margin needed for an absolutely positioned element */
 }
+
+.centered-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 20px; /* Adjust based on your preference */
+}
+
+#sosButton{
+  width: 100px;        /* Set width of button */
+  height: 100px;       /* Set height of button */
+  border-radius: 50%;  /* Makes the button round */
+  font-size: 20px;     /* Adjust font size as per your requirement */
+  border: none;        /* Removes default border */
+  background-color: #ad0404; /* Background color */
+  color: white;        /* Text color */
+  cursor: pointer;     /* Makes it clear that the button is clickable */
+  outline: none;       /* Removes the default focus outline */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
 
