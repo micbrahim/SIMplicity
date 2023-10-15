@@ -19,6 +19,7 @@
       Emergency contact notified, help is on the way!
     </div>    
       <div id="callingArea">
+        <div id = "help"><h1>Make A Call</h1></div>
         <div id="primaryNumber">
           <lable for="fromNumberSelect">From: </lable>
           <select id="fromNumberSelect"></select>
@@ -32,7 +33,7 @@
         <button id="addEmergencyContact">Add Contact</button>
         </div>
         <div class="centered-btn-container">
-          <button id="callButton"><i class="fas fa-phone-"></i>Call</button>
+          <button id="callButton"><i class="fa fa-phone-"></i></button>
           <button id="sosButton"><i class="fas fa-phone-"></i>SOS</button>
         </div>        
         <div id="callControls">
@@ -90,8 +91,7 @@
 
       // Emergency Contacts
       const emergencyContacts = [
-      { name: "Emergency", number: "911" },
-      { }
+      { name: "Emergency", number: "911" }
       ];
 
       function populateEmergencyContacts() {

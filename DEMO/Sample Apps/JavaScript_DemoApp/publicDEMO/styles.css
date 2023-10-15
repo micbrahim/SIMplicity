@@ -164,3 +164,12 @@ div#videoArea video {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
+h1 {
+  font-size: 2.5em;  /* Big font size */
+  text-align: center;
+  margin-bottom: 20px; /* Some space below the title */
+  color: #E20074;  /* Dark color, you can adjust as needed */
+  border-bottom: 2px solid #E20074; /* A line under the title for emphasis */
+  padding-bottom: 10px; /* Some space between the text and the underline */
+}
+
